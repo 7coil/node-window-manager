@@ -23,7 +23,7 @@ Napi::Boolean requestAccessibility(const Napi::CallbackInfo &info) {
 }
 
 NSDictionary* getWindowInfo(int handle) {
-  CGWindowListOption listOptions = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements;
+  CGWindowListOption listOptions = kCGWindowListOptionAll | kCGWindowListExcludeDesktopElements;
   CFArrayRef windowList = CGWindowListCopyWindowInfo(listOptions, kCGNullWindowID);
 
   for (NSDictionary *info in (NSArray *)windowList) {
@@ -105,7 +105,7 @@ AXUIElementRef getAXWindowById(int handle) {
 Napi::Array getWindows(const Napi::CallbackInfo &info) {
   Napi::Env env{info.Env()};
 
-  CGWindowListOption listOptions = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements;
+  CGWindowListOption listOptions = kCGWindowListOptionAll | kCGWindowListExcludeDesktopElements;
   CFArrayRef windowList = CGWindowListCopyWindowInfo(listOptions, kCGNullWindowID);
 
   std::vector<Napi::Number> vec;
@@ -138,7 +138,7 @@ Napi::Array getWindows(const Napi::CallbackInfo &info) {
 Napi::Number getActiveWindow(const Napi::CallbackInfo &info) {
   Napi::Env env{info.Env()};
 
-  CGWindowListOption listOptions = kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements;
+  CGWindowListOption listOptions = kCGWindowListOptionAll | kCGWindowListExcludeDesktopElements;
   CFArrayRef windowList = CGWindowListCopyWindowInfo(listOptions, kCGNullWindowID);
 
   for (NSDictionary *info in (NSArray *)windowList) {
